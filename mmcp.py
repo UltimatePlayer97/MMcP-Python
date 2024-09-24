@@ -36,18 +36,16 @@ class MMcP:
         print(f"Created instance: {name}, in the directory: {instanceDir}")
     
     def listInstances(self):
-        if not self.instances:
+        if not self.defaultDir.exists() or not any(self.defaultDir.iterdir()):
             print("No instance found")
             print("Using Vanilla instance.")
         else:
             print("Game instances: ")
-            for instance in self.instances:
-                # Check if the directory exists
-                if os.path.isdir(instance.instanceDir):
-                    print(f" - {instance.instanceName} (Directory: {instance.instanceDir})")
-                else:
-                    print(f" - {instance.instanceName} (Directory: {instance.instanceDir}) - Directory not found!")
-    
+            # Iterate over the directories in the default directory
+            for instanceDir in self.defaultDir.iterdir():
+                if instanceDir.is_dir():
+                    print(f" - {instanceDir.name} (Directory: {instanceDir})")
+
     def deleteInstance(self, name):
         instanceDir = self.defaultDir / name
         
