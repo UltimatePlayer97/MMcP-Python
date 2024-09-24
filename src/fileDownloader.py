@@ -1,18 +1,19 @@
 import shutil
 import requests
-from mmcp import *
 from concurrent.futures import ThreadPoolExecutor
 
 class McFileDownloader:
+     manifest = ""
+
      def fetchVersionManifest(self):
         # Fetch the version manifest from Mojang's servers
         manifest_url = "https://launchermeta.mojang.com/mc/game/version_manifest_v2.json"
         response = requests.get(manifest_url)
         manifest = response.json()
-        return manifest
+        self.manifest = manifest
      
         # Fetch the Minecraft version manifest
-        manifest = self.fetchVersionManifest()
+        # manifest = self.fetchVersionManifest()
 
      def getVersionInfo(self, version_id, manifest):
         # Get the specific version information from the manifest

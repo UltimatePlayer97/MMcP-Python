@@ -9,7 +9,7 @@ class GameInstance:
         self.instanceName = instanceName
         self.instanceDir = instanceDir
 
-class MMcP:
+class MMcP(McFileDownloader):
     def __init__(self, minecraftLauncher):
         self.minecraftLauncher = minecraftLauncher
         self.instances = []
@@ -42,7 +42,7 @@ class MMcP:
             version_types = ["release"]
 
         # List available versions and prompt user to choose
-        filtered_versions = [v for v in manifest['versions'] if v['type'] in version_types]
+        filtered_versions = [v for v in super().manifest['versions'] if v['type'] in version_types]
         print("\nAvailable Minecraft Versions:")
         for version in filtered_versions:
             print(f"- {version['id']} ({version['type']})")
@@ -50,7 +50,7 @@ class MMcP:
         version_id = input("Enter the Minecraft version: ")
 
         # Fetch version info for the selected version
-        version_info = self.getVersionInfo(version_id, manifest)
+        version_info = self.getVersionInfo(version_id, super().manifest)
         if not version_info:
             print(f"Version {version_id} not found!")
             return
