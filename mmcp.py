@@ -1,4 +1,5 @@
 import os
+import shutil
 import subprocess
 from pathlib import Path
 
@@ -48,12 +49,20 @@ class MMcP:
                     print(f" - {instance.instanceName} (Directory: {instance.instanceDir}) - Directory not found!")
     
     def deleteInstance(self, name):
-        instancesToRemove = next((i for i in self.instances if i.instanceName == name), None)
-        if instancesToRemove:
-            self.instances.remove(instancesToRemove)
-            print(f"Deleted instance: {name}")
+        instanceDir = self.defaultDir / name
+        
+        if instanceDir.exists() and instanceDir.is_dir():
+            # Remove the folder from the file system
+            shutil.rmtree(instanceDir)
+            print(f"Deleted instance directory: {instanceDir}")
+            
+            # Remove the instance from the memory list, if it exists
+            instanceToRemove = next((i for i in self.instances if i.instanceName == name), None)
+            if instanceToRemove:
+                self.instances.remove(instanceToRemove)
+                print(f"Deleted instance: {name} from memory")
         else:
-            print(f"No instances called {name} found.")
+            print(f"No instance directory found for: {name}")
 
     def startMinecraft(self):
         print("Starting Minecraft Launcher, please wait.....")
