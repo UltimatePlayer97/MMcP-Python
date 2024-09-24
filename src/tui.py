@@ -1,5 +1,6 @@
 import os
 import time
+import shutil
 from mmcp import *
 
 def tui(mmcp):
@@ -8,6 +9,7 @@ def tui(mmcp):
         print("\nSelect an option:")
         print("[C] Create Instance")
         print("[L] List Instances")
+        print("[Z] Compress an instance into a ZIP file")
         print("[D] Delete Instance")
         print("[S] Start Minecraft Launcher")
         print("[0] Exit MMcP")
@@ -19,6 +21,12 @@ def tui(mmcp):
             mmcp.createInstance(name)
         elif choice == "L":
             mmcp.listInstances()
+        elif choice == "Z":
+            name = input("Enter instance name to compress: ")
+            instancePath = os.path.join("MMcP-Instances", name)
+            zipPath = os.path.join("MMcP-Instances", name)
+            shutil.make_archive(zipPath, "zip", instancePath)
+            print(f"Instance '{name}' has been compressed into '{zipPath}.zip'")
         elif choice == "D":
             name = input("Enter instance name to delete: ")
             mmcp.deleteInstance(name)
