@@ -17,8 +17,7 @@ def tui(mmcp):
 
         if choice == "C":
             name = input("Enter instance name: ")
-            dir_ = input("Enter instance dir (leave blank for default): ")
-            mmcp.createInstance(name, dir_)
+            mmcp.createInstance(name)
         elif choice == "L":
             mmcp.listInstances()
         elif choice == "D":

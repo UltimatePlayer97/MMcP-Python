@@ -19,18 +19,16 @@ class MMcP:
             self.defaultDir.mkdir()
             print(f"Default instance created at: {self.defaultDir}")
 
-    def createInstance(self, name, dir_):
+    def createInstance(self, name):
         minecraftVersion = input("Enter the Minecraft version: ")
 
-        if not dir_:
-            newDir = self.defaultDir / name
-            if not newDir.exists():
-                newDir.mkdir()
-                print(f"Instance created at: {newDir}")
-            instanceDir = newDir
-        else:
-            instanceDir = Path(dir_)
+        # Use the default directory to store the instance
+        instanceDir = self.defaultDir / name
+        if not instanceDir.exists():
+            instanceDir.mkdir()
+            print(f"Instance created at: {instanceDir}")
 
+        # Create and store the new instance in memory
         instance = GameInstance(name, str(instanceDir))
         self.instances.append(instance)
         print(f"Created instance: {name}, in the directory: {instanceDir}")
@@ -58,7 +56,6 @@ class MMcP:
             instanceToRemove = next((i for i in self.instances if i.instanceName == name), None)
             if instanceToRemove:
                 self.instances.remove(instanceToRemove)
-                print(f"Deleted instance: {name} from memory")
         else:
             print(f"No instance directory found for: {name}")
 
