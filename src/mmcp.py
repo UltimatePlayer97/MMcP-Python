@@ -36,10 +36,14 @@ class MMcP:
 
     def downloadFile(self, url, dest):
         # Download a file from a given URL and save it to the destination
-        response = requests.get(url, stream=True)
-        with open(dest, 'wb') as f:
-            shutil.copyfileobj(response.raw, f)
-        print(f"Downloaded: {url}")
+        try:
+            response = requests.get(url, stream=True)
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            with open(dest, 'wb') as f:
+                shutil.copyfileobj(response.raw, f)
+            print(f"Downloaded: {url}")
+        except Exception as e:
+            print(f"Failed to download {url}: {e}")
 
     def downloadMinecraftFiles(self, version_info, instanceDir):
         # Download the necessary Minecraft files (JAR, libraries, and assets)
@@ -81,15 +85,37 @@ class MMcP:
                 # Wait for all downloads to finish
                 for future in futures:
                     future.result()
+    
+        download_libraries_and_assets()
 
     def createInstance(self, name):
         # Fetch the Minecraft version manifest
         manifest = self.fetchVersionManifest()
 
+        # Ask user what type of versions they want to see
+        print("\nSelect which versions to show:")
+        print("[1] Releases only")
+        print("[2] Releases and Snapshots")
+        print("[3] Include all (Releases, Snapshots, Betas, Alphas)")
+
+        choice = input("Choose which channels you wish to see: ")
+
+        # Filter versions based on user choice
+        if choice == "1":
+            version_types = ["release"]
+        elif choice == "2":
+            version_types = ["release", "snapshot"]
+        elif choice == "3":
+            version_types = ["release", "snapshot", "old_beta", "old_alpha"]
+        else:
+            print("Invalid choice. Defaulting to Releases only.")
+            version_types = ["release"]
+
         # List available versions and prompt user to choose
-        print("Available Minecraft Versions:")
-        for version in manifest['versions']:
-            print(f"- {version['id']}")
+        filtered_versions = [v for v in manifest['versions'] if v['type'] in version_types]
+        print("\nAvailable Minecraft Versions:")
+        for version in filtered_versions:
+            print(f"- {version['id']} ({version['type']})")
 
         version_id = input("Enter the Minecraft version: ")
 
