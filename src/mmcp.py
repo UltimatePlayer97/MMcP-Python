@@ -1,3 +1,4 @@
+import os
 import shutil
 import requests
 import subprocess
@@ -149,6 +150,12 @@ class MMcP:
             for instanceDir in self.defaultDir.iterdir():
                 if instanceDir.is_dir():
                     print(f" - {instanceDir.name} (Directory: {instanceDir})")
+    
+    def compressInstance(self, name):
+            instancePath = os.path.join("MMcP-Instances", name)
+            zipPath = os.path.join("MMcP-Instances", name)
+            shutil.make_archive(zipPath, "zip", instancePath)
+            print(f"Instance '{name}' has been compressed into '{zipPath}.zip'")
 
     def deleteInstance(self, name):
         instanceDir = self.defaultDir / name

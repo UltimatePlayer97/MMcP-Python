@@ -22,11 +22,8 @@ def tui(mmcp):
         elif choice == "L":
             mmcp.listInstances()
         elif choice == "Z":
-            name = input("Enter instance name to compress: ")
-            instancePath = os.path.join("MMcP-Instances", name)
-            zipPath = os.path.join("MMcP-Instances", name)
-            shutil.make_archive(zipPath, "zip", instancePath)
-            print(f"Instance '{name}' has been compressed into '{zipPath}.zip'")
+            name = input("Enter name of instance to compress: ")
+            mmcp.compressInstance(name)
         elif choice == "D":
             name = input("Enter instance name to delete: ")
             mmcp.deleteInstance(name)
