@@ -10,7 +10,7 @@ def main():
     if os.name == "nt": # Windows
         launcherDir = "C:\\XboxGames\\Minecraft Launcher\\Content\\Minecraft.exe"
     elif os.name == "posix": # Linux
-        launcherDir = "minecraft-launcher"
+        launcherDir = "/sbin/minecraft-launcher"
     elif os.name == "darwin": #MacOS
         launcherDir = "/Applications/Minecraft.app"
     else:
@@ -29,4 +29,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-    input()
+    #input()
