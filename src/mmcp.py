@@ -20,6 +20,11 @@ class MMcP(McFileDownloader):
             self.defaultDir.mkdir()
             print(f"Default instance created at: {self.defaultDir}")
 
+        else:
+            for i in Path(self.defaultDir).iterdir():
+                self.instances.append(GameInstance(i.name, i))
+                print("Imported instance:\n{} | {}".format(i.name,i))
+
     def createInstance(self, name):
 
         # Ask user what type of versions they want to see
@@ -102,5 +107,18 @@ class MMcP(McFileDownloader):
             print(f"No instance directory found for: {name}")
 
     def startMinecraft(self):
+        i = 0
+        print("Select instance to run:")
+        for j in self.instances:
+            i += 1
+            print("[{}]: {}".format(i, j.instanceName))
+        
+        try:
+            selected = int(input()) - 1
+        except:
+            print("Input is not a number. Defaulting to first option.")
+            selected = 0
+        
         print("Starting Minecraft Launcher, please wait.....")
-        subprocess.Popen(self.minecraftLauncher)
+        formattedString = "--workDir=" + str(self.instances[selected].instanceDir.absolute())
+        subprocess.Popen([self.minecraftLauncher, formattedString])
