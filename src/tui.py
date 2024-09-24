@@ -1,6 +1,5 @@
 import os
 import time
-import shutil
 from mmcp import *
 
 def tui(mmcp):
