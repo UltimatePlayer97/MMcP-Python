@@ -9,7 +9,7 @@ class GameInstance:
         self.instanceName = instanceName
         self.instanceDir = instanceDir
 
-class MMcP:
+class MMcP(McFileDownloader):
     def __init__(self, minecraftLauncher):
         self.minecraftLauncher = minecraftLauncher
         self.instances = []
@@ -19,6 +19,11 @@ class MMcP:
         if not self.defaultDir.exists():
             self.defaultDir.mkdir()
             print(f"Default instance created at: {self.defaultDir}")
+
+        else:
+            for i in Path(self.defaultDir).iterdir():
+                self.instances.append(GameInstance(i.name, i))
+                print("Imported instance:\n{} | {}".format(i.name,i))
 
     def createInstance(self, name):
 
@@ -42,7 +47,7 @@ class MMcP:
             version_types = ["release"]
 
         # List available versions and prompt user to choose
-        filtered_versions = [v for v in manifest['versions'] if v['type'] in version_types]
+        filtered_versions = [v for v in super().manifest['versions'] if v['type'] in version_types]
         print("\nAvailable Minecraft Versions:")
         for version in filtered_versions:
             print(f"- {version['id']} ({version['type']})")
@@ -50,7 +55,7 @@ class MMcP:
         version_id = input("Enter the Minecraft version: ")
 
         # Fetch version info for the selected version
-        version_info = self.getVersionInfo(version_id, manifest)
+        version_info = self.getVersionInfo(version_id, super().manifest)
         if not version_info:
             print(f"Version {version_id} not found!")
             return
@@ -102,5 +107,18 @@ class MMcP:
             print(f"No instance directory found for: {name}")
 
     def startMinecraft(self):
+        i = 0
+        print("Select instance to run:")
+        for j in self.instances:
+            i += 1
+            print("[{}]: {}".format(i, j.instanceName))
+        
+        try:
+            selected = int(input()) - 1
+        except:
+            print("Input is not a number. Defaulting to first option.")
+            selected = 0
+        
         print("Starting Minecraft Launcher, please wait.....")
-        subprocess.Popen(self.minecraftLauncher)
+        formattedString = "--workDir=" + str(self.instances[selected].instanceDir.absolute())
+        subprocess.Popen([self.minecraftLauncher, formattedString])
