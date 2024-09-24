@@ -6,10 +6,10 @@ Having trouble making your Minecraft installation more portable? This tool will 
 ## Features
 Currently, the following features are available:
 - [Complete]: Launch the (official) Minecraft Launcher (logins are managed by the Minecraft Launcher, not MMcP).
-- [In-Progress]: Create, modify and remove `instances`.
+- [Complete]: Create, modify and remove `instances`.
 - [Planned]: Download and install community-created contents (resource packs, mods, shaders, etc.) via providers (Modrinth, CurseForge, etc.).
 - [Planned]: Auto-launch Minecraft via MMcP.
-- [Planned]: Export `instances` into a compressed archive to be imported into other third-party launchers ([Prism Launcher](https://prismlauncher.org/), [Modrinth App](https://modrinth.com/app), [CurseForge App](https://www.curseforge.com/download/app), etc.).
+- [Complete]: Export `instances` into a compressed archive to be imported into other third-party launchers ([Prism Launcher](https://prismlauncher.org/), [Modrinth App](https://modrinth.com/app), [CurseForge App](https://www.curseforge.com/download/app), etc.).
 - And many more! (Send ideas by creating a feature request, pull/merge request, etc.).
 
 ## How To Build the Project
