@@ -12,7 +12,7 @@ class MMcP:
     def __init__(self, minecraftLauncher):
         self.minecraftLauncher = minecraftLauncher
         self.instances = []
-        self.defaultDir = Path(os.getcwd()) / "MMcP-Instances"
+        self.defaultDir = Path(__file__).resolve().parent.parent / "MMcP-Instances"
 
         # Create default directory for storing the instance
         if not self.defaultDir.exists():
