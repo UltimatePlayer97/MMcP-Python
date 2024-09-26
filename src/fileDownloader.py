@@ -9,8 +9,8 @@ class McFileDownloader:
         # Fetch the version manifest from Mojang's servers
         manifest_url = "https://launchermeta.mojang.com/mc/game/version_manifest_v2.json"
         response = requests.get(manifest_url)
-        manifest = response.json()
-        self.manifest = manifest
+        self.manifest = response.json()
+        return self.manifest
      
         # Fetch the Minecraft version manifest
         # manifest = self.fetchVersionManifest()
