@@ -26,6 +26,8 @@ git clone https://github.com/UltimatePlayer97/MMcP-Python.git
 
 cd MMcP-Python
 ```
+in the `MMcP-Python` folder, open up a command prompt directing to this folder and run `pip install -r requirements.txt`, this will ensure all the modules needed for this project are installed.
+
 Once you have entered the project folder, go into the `src` folder and run the `main.py` file.
 
 ---
