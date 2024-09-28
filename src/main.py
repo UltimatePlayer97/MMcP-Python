@@ -5,6 +5,7 @@ from locateLauncher import *
 
 
 def main():
+    tui = TUI()
     print("MMcP - Make Minecraft Portable")
 
     launcherDir = locateLauncher().getPathToLauncher()
@@ -16,7 +17,7 @@ def main():
     else:
         minecraft = launcherDir
         mmcp = MMcP(minecraft)
-        tui(mmcp)
+        tui.mainMenu(mmcp)
 
 
 if __name__ == "__main__":
