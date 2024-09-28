@@ -6,6 +6,7 @@ from locateLauncher import *
 
 def main():
     tui = TUI()
+    tui.clear() # Clears the terminal for a nicer window.
     print("MMcP - Make Minecraft Portable")
 
     launcherDir = locateLauncher().getPathToLauncher()

@@ -4,6 +4,18 @@ import shutil
 from mmcp import *
 
 class TUI:
+    __clearLine = "\033[H\033[1J"       # Clears a whole line
+    __clearConsole = "\033[H\033[2J"    # Clears entire console
+    __clearAll = "\033[H\033[3J"        # Clears entire console PLUS scrollback buffer (NUCLEAR!!!)
+
+    def clear(self, mode = 0):
+        if mode == 1:
+            print(self.__clearLine, end='')
+        elif mode == -1:
+            print(self.__clearAll, end='')
+        else:
+            print(self.__clearConsole, end='')
+
     def mainMenu(self, mmcp):
         while True:
             time.sleep(3)
