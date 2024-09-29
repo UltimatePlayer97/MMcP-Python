@@ -1,31 +1,25 @@
 import os
 from mmcp import *
 from tui import *
-
+from locateLauncher import *
 
 
 def main():
+    tui = TUI()
+    tui.clear() # Clears the terminal for a nicer window.
     print("MMcP - Make Minecraft Portable")
 
-    if os.name == "nt": # Windows
-        launcherDir = "C:\\XboxGames\\Minecraft Launcher\\Content\\Minecraft.exe"
-    elif os.name == "posix": # Linux
-        launcherDir = "/sbin/minecraft-launcher"
-    elif os.name == "darwin": #MacOS
-        launcherDir = "/Applications/Minecraft.app"
+    launcherDir = locateLauncher().getPathToLauncher()
+    if launcherDir == None:
+        print("An issue occurred while parsing launcher location. Either your platform is unsupported, or the path to the launcher doesn't exist.\n")
+        print("If you're on a supported platform but doesn't have the launcher installed, you can download and install the launcher from")
+        print("https://www.minecraft.net/en-us/download")
+        exit()
     else:
-        print("MMcP does not yet support your platform, stay tuned for more info.")
-        return
-
-    if Path(launcherDir).exists():
         minecraft = launcherDir
         mmcp = MMcP(minecraft)
-        tui(mmcp)
-    else:
-        print("There was an issue picking up the launcher. MMcP does not implement a function to auto install.")
-        print("Please download Minecraft Launcher at https://www.minecraft.net/en-us/download")
-        return
-    
+        tui.mainMenu(mmcp)
+
 
 if __name__ == "__main__":
     main()
