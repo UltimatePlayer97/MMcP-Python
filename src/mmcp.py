@@ -121,5 +121,5 @@ class MMcP(McFileDownloader):
             selected = 0
         
         print("Starting Minecraft Launcher, please wait.....")
-        formattedString = "--workDir=" + str(self.instances[selected].instanceDir.absolute())
+        formattedString = "--workDir=" + str(Path(self.instances[selected].instanceDir).absolute())
         subprocess.Popen([self.minecraftLauncher, formattedString])
