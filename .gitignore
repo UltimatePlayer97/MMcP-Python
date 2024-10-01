@@ -1,4 +1,5 @@
 __pycache__/
 MMcP-Instances/
 src/gui.py
+src/app.kv
 .venv
