@@ -1,6 +1,4 @@
-import os
 import time
-import shutil
 from mmcp import *
 
 class TUI:

@@ -1,4 +1,3 @@
-import os
 from mmcp import *
 from tui import *
 from locateLauncher import *
