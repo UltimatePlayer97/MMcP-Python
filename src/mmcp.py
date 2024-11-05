@@ -56,7 +56,7 @@ class MMcP(McFileDownloader):
         version_id = input("Enter the Minecraft version: ")
 
         # Fetch version info for the selected version
-        version_info = self.getVersionInfo(version_id, self.manifest)
+        version_info = self.getVersionInfo(version_id)
         if not version_info:
             print(f"Version {version_id} not found!")
             return
