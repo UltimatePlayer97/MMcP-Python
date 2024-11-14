@@ -9,7 +9,7 @@ Currently, the following features are available:
 - [Complete]: Create, modify and remove `instances`.
 - [Planned]: Download and install community-created contents (resource packs, mods, shaders, etc.) via providers (Modrinth, CurseForge, etc.).
 - [Planned]: Auto-launch Minecraft via MMcP.
-- [Complete]: Export `instances` into a compressed archive to be imported into other third-party launchers ([Prism Launcher](https://prismlauncher.org/), [Modrinth App](https://modrinth.com/app), [CurseForge App](https://www.curseforge.com/download/app), etc.).
+- [Partial]: Export `instances` into a compressed archive to be imported into other third-party launchers ([Prism Launcher](https://prismlauncher.org/), [Modrinth App](https://modrinth.com/app), [CurseForge App](https://www.curseforge.com/download/app), etc.).
 - And many more! (Send ideas by creating a feature request, pull/merge request, etc.).
 
 ## How To Build the Project
