@@ -37,7 +37,7 @@ class FabricMeta:
                     
                     print(f"Selected loader version {data["loader"]["version"]} as the best version.")
 
-                    # While the idea is to programatically get the link to the main resource,
+                    # While the idea is to programmatically get the link to the main resource,
                     # I decided I've wasted enough time doing all that, so here it is.
                     mm = MavenFetcher("https://maven.fabricmc.net/")
                     mm.fromString(data["loader"]["maven"])
@@ -58,6 +58,6 @@ class FabricMeta:
 
                     break
         except Exception as e:
-            print("Error occured while parsing data:\n",e)
+            print("Error occurred while parsing data:\n",e)
 
         return data

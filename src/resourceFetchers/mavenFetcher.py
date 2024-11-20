@@ -45,6 +45,6 @@ class MavenFetcher:
                 response.raise_for_status()
                 open(self.__n, "wb").write(response.content)
             except Exception as e:
-                raise print(f"An error occured while obtaining the following resource:\n{e}")
+                raise print(f"An error occurred while obtaining the following resource:\n{e}")
         else:
             raise Exception("Failure in obtaining JAR. The requested link does not point to a JAR file.")
