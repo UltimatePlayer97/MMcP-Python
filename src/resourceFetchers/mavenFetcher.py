@@ -1,6 +1,19 @@
 import requests
 
 class MavenFetcher:
+    # Public properties
+    # These are useful outside of this class.
+    fileName = ""
+    pathStructure = ""
+    resourceString = ""
+    finalUrl = ""
+
+    # Private properties
+    # These are not necessary outside of this class.
+    __g = ""
+    __a = ""
+    __v = ""
+
     def __init__(self, baseUrl) -> None:
         # Handles trailing forward slash
         # insertion when there's none.
@@ -20,6 +33,13 @@ class MavenFetcher:
         self.__g = groupID
         self.__a = artifactID
         self.__v = artifactVersion
+        return self
+
+    def __constructData(self):
+        self.fileName = self.__a + "-" + self.__v + ".jar"
+        self.pathStructure = self.__g.replace(".", "/") + "/" + self.__a + "/" + self.__v
+        self.resourceString = self.pathStructure + "/" + self.fileName
+        self.finalUrl = self.targetUrl + self.resourceString
         return self
 
     def getResource(self) -> None:
