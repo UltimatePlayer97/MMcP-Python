@@ -8,6 +8,7 @@ class MavenFetcher:
     pathStructure = ""
     resourceString = ""
     finalUrl = ""
+    rootDir = ""
 
     # Private properties
     # These are not necessary outside of this class.
@@ -42,6 +43,12 @@ class MavenFetcher:
         self.resourceString = self.pathStructure + "/" + self.fileName
         self.finalUrl = self.targetUrl + self.resourceString
         return self
+    
+    def setRoot(self, root):
+        if root[-1] != "/":
+            root = root + "/"
+        self.rootDir = root
+        return self
 
     def getResource(self) -> None:
         # Making sure there's no nonsense.
@@ -56,9 +63,9 @@ class MavenFetcher:
             try:
                 response = requests.get(self.finalUrl, allow_redirects=True)
                 response.raise_for_status()
-                os.makedirs(self.pathStructure)
-                open(self.resourceString, "wb").write(response.content)
+                os.makedirs(self.rootDir + self.pathStructure, exist_ok=True)
+                open(self.rootDir + self.resourceString, "wb").write(response.content)
             except Exception as e:
-                raise print(f"An error occurred while obtaining the following resource:\n{e}")
+                raise Exception(f"An error occurred while obtaining the following resource:\n{e}")
         else:
             raise Exception("Failure in obtaining JAR. The requested link does not point to a JAR file.")
