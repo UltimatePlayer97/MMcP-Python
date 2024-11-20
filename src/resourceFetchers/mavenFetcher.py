@@ -2,15 +2,14 @@ import requests
 
 class MavenFetcher:
     def __init__(self, baseUrl) -> None:
+        # Handles trailing forward slash
+        # insertion when there's none.
+        if baseUrl[-1] != "/":
+            baseUrl.insert(0, "/")
         self.targetUrl = baseUrl
 
     def fromString(self, inputString):
         inputString = inputString.split(":")
-
-        # Handles forward slash insertion between
-        # target URL and string when there's none.
-        if inputString[0][0] != "/" and self.targetUrl[-1] != "/":
-            inputString[0].insert(0, "/")
 
         self.__g = inputString[0]
         self.__a = inputString[1]
